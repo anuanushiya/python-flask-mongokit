@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+	<title>Tasks</title>
+</head>
+<body>
+	<a href="http://flask.pocoo.org/" target="_blank">
+		<img src="{{ url_for('static', filename='logo.png') }}" style="weigth:100px; height: 90px"/>
+	</a>
+		<br/>
+	Tasks:
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Title</th>
+				<th>Body</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for task in tasks %}
+			<tr>
+				<td>{{ task._id }}</td>
+				<td>{{ task.title }} </td>
+				<td>{{ task.creation }} </td>
+				<td> <a href="{{ url_for('delete_task', task_id= task._id) }}">x </a> </td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	</br>
+	CREATE
+	<form action="{{ url_for('add_task') }}" method="POST">
+		Title: <input type="text"  name="title"/></br>
+		Body:  <input type="text"  name="body" /></br>
+
+		<button>OK</button>
+	</form>
+	</br>
+	UPDATE
+	<form action="{{ url_for('update_task') }}" method="POST">
+		ID: 	<input type="text"  name="id"/></br>
+		Title: <input type="text"  name="title"/></br>
+		Body:  <input type="text"  name="body" /></br>
+
+		<button>OK</button>
+	</form>
+</body>
+</html>
